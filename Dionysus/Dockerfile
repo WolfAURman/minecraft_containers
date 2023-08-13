@@ -16,7 +16,9 @@ RUN curl -L https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-$G
     && update-alternatives --install /usr/bin/jar jar "$JAVA_HOME"/bin/jar 2000
 
 RUN mkdir /app \
-    && curl -L https://nightly.link/nopjmp/Dionysus/workflows/dev/dev/Dionysus-JDK17.zip && unzip Dionysus-JDK17.zip -d /app
+    && curl -L https://nightly.link/nopjmp/Dionysus/workflows/dev/dev/Dionysus-JDK17.zip -o Dionysus-JDK17.zip && unzip Dionysus-JDK17.zip -d /app
+
+RUN echo "eula=true" > /app/eula.txt
 
 WORKDIR /server
 COPY entrypoint.sh /

@@ -4,9 +4,15 @@ set -e
 
 {
     # copy /app/dionysus-paperclip.jar to /server/dionysus-paperclip.jar if it doesn't exist
-    if [ ! -f /app/dionysus-paperclip.jar ]; then
+    if [ ! -f /server/dionysus-paperclip.jar ]; then
         echo "dionysus-paperclip jar not found, copying from /app/dionysus-paperclip.jar"
         cp /app/dionysus-paperclip.jar /server/dionysus-paperclip.jar
+    fi
+
+    # copy /app/eula.txt to /server/eula.txt if it doesn't exist
+    if [ ! -f /server/eula.txt ]; then
+        echo "eula txt not found, copying from /app/eula.txt"
+        cp /app/eula.txt /server/eula.txt
     fi
 
     exec java \
