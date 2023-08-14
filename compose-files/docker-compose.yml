@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+
+  proxy:
+    image: "ubi9-minimal-proxy-java17-latest"
+    container_name: "proxy"
+    environment:
+      - MEMORYSIZE="1G"
+    ports:
+      - "25565:25565"
+    networks:
+      - minecraft
+    restart: unless-stopped
+    volumes:
+      - "/home/ikrell/server/proxy:/proxy:rw,Z"
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: "2048M"
+
+  main:
+    image: "ubi9-minimal-dionysus-java17-latest"
+    container_name: "main"
+    environment:
+      - MEMORYSIZE="4G"
+    networks:
+      - minecraft
+    restart: unless-stopped
+    volumes:
+      - "/home/ikrell/server/main:server:rw,Z"
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: "2048M"
+
+networks:
+  minecraft:
