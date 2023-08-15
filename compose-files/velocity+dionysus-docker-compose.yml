@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  proxy:
+    image: "el9.2-java17-velocity:latest"
+    container_name: "proxy"
+    environment:
+      - MEMORYSIZE="1G"
+    ports:
+      - "25565:25565"
+    networks:
+      - minecraft
+    restart: unless-stopped
+    volumes:
+      - "/home/ikrell/server/proxy:/proxy:rw,Z"
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: "2048M"
+
+  main:
+    image: "el9.2-java17-dionysus:latest"
+    container_name: "main"
+    environment:
+      - MEMORYSIZE="3G"
+    networks:
+      - minecraft
+    restart: unless-stopped
+    volumes:
+      - "/home/ikrell/server/main:server:rw,Z"
+    deploy:
+      resources:
+        limits:
+          cpus: "3"
+          memory: "4096M"
+
+networks:
+  minecraft:
