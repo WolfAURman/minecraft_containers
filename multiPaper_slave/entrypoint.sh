@@ -31,5 +31,7 @@ set -e
         -Daikars.new.flags=true -XX:G1NewSizePercent=30 \
         -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M \
         -XX:G1ReservePercent=20 \
+        -Dmultipaper.master-connection.my-name=$SERVERNAME \
+        -Dmultipaper.master-connection.master-address=$MASTERIP:35353 \
         -jar multipaper-1.19.2-37.jar "$@"
 }
