@@ -1,0 +1,60 @@
+version: "3.8"
+
+services:
+  proxy:
+    image: "el9.2-java17-velocity:latest"
+    container_name: "proxy"
+    environment:
+      - MEMORYSIZE="1G"
+    ports:
+      - "25565:25565"
+    networks:
+      - minecraft
+    restart: unless-stopped
+    volumes:
+      - "/home/ikrell/server/proxy:/proxy:rw,Z"
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: "2048M"
+
+  slave-01:
+    image: "el9.2-java17-multipaper:1.19.2-37"
+    container_name: "slave-01"
+    environment:
+      - MEMORYSIZE="2G"
+      - SERVERNAME="slave-01"
+      - MASTERIP="proxy"
+    networks:
+      - minecraft
+    restart: unless-stopped
+    volumes:
+      - "/home/ikrell/servers/slave-01:server:rw,Z"
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: "3072M"
+
+  slave-02:
+    image: "el9.2-java17-multipaper:1.19.2-37"
+    container_name: "slave-02"
+    environment:
+      - MEMORYSIZE="2G"
+      - SERVERNAME="slave-02"
+      - MASTERIP="proxy"
+    networks:
+      - minecraft
+    restart: unless-stopped
+    volumes:
+      - "/home/ikrell/servers/slave-02:server:rw,Z"
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: "3072M"
+
+
+networks:
+  minecraft:
