@@ -8,6 +8,8 @@ services:
       - MEMORYSIZE="1G"
     ports:
       - "25565:25565"
+    stdin_open: true
+    tty: true
     networks:
       - minecraft
     restart: unless-stopped
@@ -26,6 +28,8 @@ services:
       - MEMORYSIZE="2G"
       - SERVERNAME="slave-01"
       - MASTERIP="proxy"
+    stdin_open: true
+    tty: true
     networks:
       - minecraft
     restart: unless-stopped
@@ -44,6 +48,8 @@ services:
       - MEMORYSIZE="2G"
       - SERVERNAME="slave-02"
       - MASTERIP="proxy"
+    stdin_open: true
+    tty: true
     networks:
       - minecraft
     restart: unless-stopped

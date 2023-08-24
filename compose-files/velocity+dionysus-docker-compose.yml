@@ -8,6 +8,8 @@ services:
       - MEMORYSIZE="1G"
     ports:
       - "25565:25565"
+    stdin_open: true
+    tty: true
     networks:
       - minecraft
     restart: unless-stopped
@@ -24,6 +26,8 @@ services:
     container_name: "main"
     environment:
       - MEMORYSIZE="3G"
+    stdin_open: true
+    tty: true
     networks:
       - minecraft
     restart: unless-stopped
