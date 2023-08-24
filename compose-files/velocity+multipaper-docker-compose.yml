@@ -21,12 +21,12 @@ services:
           cpus: "1"
           memory: "2048M"
 
-  slave-01:
+  slave01:
     image: "el9.2-java17-multipaper:1.19.2-37"
-    container_name: "slave-01"
+    container_name: "slave01"
     environment:
       - MEMORYSIZE="2G"
-      - SERVERNAME="slave-01"
+      - SERVERNAME="slave01"
       - MASTERIP="proxy"
     stdin_open: true
     tty: true
@@ -34,19 +34,19 @@ services:
       - minecraft
     restart: unless-stopped
     volumes:
-      - "/home/ikrell/servers/slave-01:server:rw,Z"
+      - "/home/ikrell/servers/slave01:server:rw,Z"
     deploy:
       resources:
         limits:
           cpus: "2"
           memory: "3072M"
 
-  slave-02:
+  slave02:
     image: "el9.2-java17-multipaper:1.19.2-37"
-    container_name: "slave-02"
+    container_name: "slave02"
     environment:
       - MEMORYSIZE="2G"
-      - SERVERNAME="slave-02"
+      - SERVERNAME="slave02"
       - MASTERIP="proxy"
     stdin_open: true
     tty: true
@@ -54,7 +54,7 @@ services:
       - minecraft
     restart: unless-stopped
     volumes:
-      - "/home/ikrell/servers/slave-02:server:rw,Z"
+      - "/home/ikrell/servers/slave02:server:rw,Z"
     deploy:
       resources:
         limits:
