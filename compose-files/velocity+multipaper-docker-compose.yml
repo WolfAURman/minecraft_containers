@@ -1,15 +1,16 @@
+---
 version: "3.8"
 
 services:
   proxy:
-    image: "el9.2-java17-velocity:latest"
+    image: "el9.2-java17-velocity:3.2.0-265"
     container_name: "proxy"
     environment:
-      - MEMORYSIZE="1G"
-    ports:
-      - "25565:25565"
+      - MEMORYSIZE: 1G
     stdin_open: true
     tty: true
+    ports:
+      - "25565:25565"
     networks:
       - minecraft
     restart: unless-stopped
@@ -25,16 +26,16 @@ services:
     image: "el9.2-java17-multipaper:1.19.2-37"
     container_name: "slave01"
     environment:
-      - MEMORYSIZE="2G"
-      - SERVERNAME="slave01"
-      - MASTERIP="proxy"
+      - MEMORYSIZE: 2G
+      - SERVERNAME: slave01
+      - MASTERIP: proxy
     stdin_open: true
     tty: true
     networks:
       - minecraft
     restart: unless-stopped
     volumes:
-      - "/home/ikrell/servers/slave01:server:rw,Z"
+      - "/home/ikrell/server/slave01:/server:rw,Z"
     deploy:
       resources:
         limits:
@@ -45,22 +46,21 @@ services:
     image: "el9.2-java17-multipaper:1.19.2-37"
     container_name: "slave02"
     environment:
-      - MEMORYSIZE="2G"
-      - SERVERNAME="slave02"
-      - MASTERIP="proxy"
+      - MEMORYSIZE: 2G
+      - SERVERNAME: slave02
+      - MASTERIP: proxy
     stdin_open: true
     tty: true
     networks:
       - minecraft
     restart: unless-stopped
     volumes:
-      - "/home/ikrell/servers/slave02:server:rw,Z"
+      - "/home/ikrell/server/slave02:/server:rw,Z"
     deploy:
       resources:
         limits:
           cpus: "2"
           memory: "3072M"
-
 
 networks:
   minecraft:
