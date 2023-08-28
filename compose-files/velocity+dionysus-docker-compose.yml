@@ -3,7 +3,7 @@ version: "3.8"
 
 services:
   proxy:
-    image: "el9.2-java17-velocity:velocity:3.2.0-265"
+    image: "el9.2-java17-velocity:3.2.0-265"
     container_name: "proxy"
     environment:
       - MEMORYSIZE: 1G
