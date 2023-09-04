@@ -15,7 +15,7 @@ RUN curl -L https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-$G
     && update-alternatives --install /usr/bin/jar jar "$JAVA_HOME"/bin/jar 2000
 
 RUN mkdir /app \
-    && curl -L https://api.purpurmc.org/v2/purpur/1.20.1/2051/download -o /app/purpur-1.20.1-2051.jar
+    && curl -L https://api.purpurmc.org/v2/purpur/1.20.1/2051/download -o /app/purpur-1.20.1.jar
 
 RUN echo "eula=true" > /app/eula.txt
 
