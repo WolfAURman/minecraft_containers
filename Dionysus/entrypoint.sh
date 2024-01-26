@@ -15,6 +15,8 @@ set -e
         cp /app/eula.txt /server/eula.txt
     fi
 
+    java --version
+
     exec java \
         -Xms$MEMORYSIZE -Xmx$MEMORYSIZE \
         --add-modules=jdk.incubator.vector \
