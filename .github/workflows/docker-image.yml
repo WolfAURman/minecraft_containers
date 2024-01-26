@@ -17,6 +17,6 @@ jobs:
     - name: Build the Docker image
       run: cd Dionysus && docker build --tag docker.io/rickaurman/el9.2-java17-dionysus-1.12.2:latest .
     - name: Test the Docker image
-      run: docker run --name=test -e=MEMORYSIZE=1G docker.io/rickaurman/el9.2-java17-dionysus-1.12.2:latest && docker exec --it test java --version
+      run: docker run -d --name=test -e=MEMORYSIZE=1G docker.io/rickaurman/el9.2-java17-dionysus-1.12.2:latest && docker exec --it test java --version
     - name: Push the Docker image
       run: docker login -u rickaurman -p ${{ secrets.DOCKER_TOKEN }} && docker push docker.io/rickaurman/el9.2-java17-dionysus-1.12.2:latest
