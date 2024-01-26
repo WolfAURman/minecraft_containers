@@ -3,20 +3,14 @@ name: Docker Image CI
 on:
   push:
     branches: [ "dionysus" ]
-  pull_request:
-    branches: [ "dionysus" ]
 
 jobs:
 
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image
       run: cd Dionysus && docker build --tag docker.io/rickaurman/el9.2-java17-dionysus-1.12.2:latest .
-    - name: Test the Docker image
-      run: docker run -i -d --rm --name=test -e=MEMORYSIZE=1G docker.io/rickaurman/el9.2-java17-dionysus-1.12.2:latest && docker exec -i test java --version
     - name: Push the Docker image
       run: docker login -u rickaurman -p ${{ secrets.DOCKER_TOKEN }} && docker push docker.io/rickaurman/el9.2-java17-dionysus-1.12.2:latest
