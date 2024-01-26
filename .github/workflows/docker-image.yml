@@ -15,6 +15,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build --tag docker.io/rickaurman/el9.2-java17-dionysus-1.12.2:latest --file Dionysus/Dockerfile .
+      run: cd Dionysus && docker build --tag docker.io/rickaurman/el9.2-java17-dionysus-1.12.2:latest .
     - name: Push the Docker image
       run: docker login -u rickaurman -p ${{ secrets.DOCKER_TOKEN }} && docker push docker.io/rickaurman/el9.2-java17-dionysus-1.12.2:latest
