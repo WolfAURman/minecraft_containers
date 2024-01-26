@@ -3,6 +3,11 @@
 set -e
 
 {
+    # displaying the java version
+    echo -e "############################"
+    java --version
+    echo -e "############################"
+
     # copy /app/dionysus-paperclip.jar to /server/dionysus-paperclip.jar if it doesn't exist
     if [ ! -f /server/dionysus-paperclip.jar ]; then
         echo "dionysus-paperclip jar not found, copying from /app/dionysus-paperclip.jar"
@@ -14,8 +19,6 @@ set -e
         echo "eula txt not found, copying from /app/eula.txt"
         cp /app/eula.txt /server/eula.txt
     fi
-
-    java --version
 
     exec java \
         -Xms$MEMORYSIZE -Xmx$MEMORYSIZE \
