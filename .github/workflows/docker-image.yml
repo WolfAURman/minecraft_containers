@@ -1,52 +1,14 @@
-name: Build container on upstream repo commit
+name: Trigger action in other repository
 
 on:
-  push:
-    branches:
-      - '*'
-    paths:
-      - '.*'
+  repository:
+    - repository: https://github.com/WolfAURman/test.git
+      branch: main
+      event: commit
 
 jobs:
-  build-container:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout upstream repository
-        uses: actions/checkout@v4
-        with:
-          repository: 'https://github.com/WolfAURman/test.git'
-          path: 'upstream-repo'
-      - name: Check for new commits in upstream repository
-        run: |
-          cd upstream-repo
-          git fetch origin
-          if [[ $(git rev-parse HEAD) != $(git rev-parse origin/main) ]]; then
-            echo "New commits found in upstream repository"
-            exit 0
-          else
-            echo "No new commits found in upstream repository"
-            exit 1
-          fi
-      - name: Build container
-        run: |
-          cd Dionysus && docker build --tag docker.io/rickaurman/el9.2-java17-dionysus-1.12.2:latest .
-          docker run --rm -e=MEMORYSIZE=1G docker.io/rickaurman/el9.2-java17-dionysus-1.12.2:latest java --version
-          docker login -u rickaurman -p ${{ secrets.DOCKER_TOKEN }} && docker push docker.io/rickaurman/el9.2-java17-dionysus-1.12.2:latest
-#name: Docker Image CI
-#
-#on:
-#  push:
-#    branches: [ "dionysus" ]
-#
-#jobs:
-#
-# build:
-#    runs-on: ubuntu-latest
-#    steps:
-#    - uses: actions/checkout@v4
-#    - name: Build the Docker image
-#      run: cd Dionysus && docker build --tag docker.io/rickaurman/el9.2-java17-dionysus-1.12.2:latest .
-#    - name: Test the Docker image
-#      run: docker run --rm -e=MEMORYSIZE=1G docker.io/rickaurman/el9.2-java17-dionysus-1.12.2:latest java --version
-#    - name: Push the Docker image
-#      run: docker login -u rickaurman -p ${{ secrets.DOCKER_TOKEN }} && docker push docker.io/rickaurman/el9.2-java17-dionysus-1.12.2:latest
+      - name: Run a script
+        run: echo "New commit detected!"
