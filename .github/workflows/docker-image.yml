@@ -1,7 +1,7 @@
 name: Trigger action in other repository
 
 on:
-  repository:
+  milestone:
     - repository: https://github.com/WolfAURman/test.git
       branch: main
       event: commit
